@@ -1,6 +1,8 @@
 const http = require('node:http');
 const { convertToCase } = require('./convertToCase/convertToCase.js');
 
+const supportedCases = ['SNAKE', 'KEBAB', 'CAMEL', 'PASCAL', 'UPPER'];
+
 function createServer() {
   return http.createServer((req, res) => {
     const errors = [];
@@ -22,6 +24,10 @@ function createServer() {
         message:
           // eslint-disable-next-line max-len, prettier/prettier
           '"toCase" query param is required. Correct request is: "/<TEXT_TO_CONVERT>?toCase=<CASE_NAME>".',
+      });
+    } else if (!supportedCases.includes(toCase)) {
+      errors.push({
+        message: `This case is not supported. Available cases: ${supportedCases.join(', ')}.`,
       });
     }
 
