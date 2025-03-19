@@ -33,7 +33,7 @@ function createServer() {
 
     if (errors.length === 0) {
       try {
-        const { originalCase, convertedText } = convertToCase(text, toCase);
+        const { originalCase, convertedText } = convertToCase(toCase, text);
 
         const result = {
           originalCase: originalCase, // тут буде значення
